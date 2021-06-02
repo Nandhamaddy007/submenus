@@ -34,7 +34,7 @@ export default function App() {
 
   let options = [
     {
-      select: 'option2',
+      select: 'Option1',
       option: [
         {
           select: 'Level2',
@@ -43,7 +43,7 @@ export default function App() {
       ]
     },
     {
-      select: 'option1',
+      select: 'Option2',
       option: [
         {
           select: 'level2',
