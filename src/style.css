@@ -32,7 +32,7 @@ li ul {
 }
 
 .dropdown-menu li:hover {
-    background: blue;
+    background: blueviolet;
 }
 
 /*--- Sublist Styles ---*/
@@ -55,9 +55,7 @@ li ul {
     margin-top: -35px;
     display: block;
 }
-nu-li {
-    padding: 10px;
-}
+
 
 .dropdown-submenu {
     position: absolute;
