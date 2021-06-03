@@ -55,8 +55,10 @@ export default function App() {
     let data = [];
     for (let option of options) {
       // console.log(option);
+      ls.push(option.select);
       data.push(rend(option));
     }
+    console.log(ls);
     if (options.option && options.option != '') {
       return <ul>{data}</ul>;
     } else {
@@ -111,6 +113,9 @@ export default function App() {
       ]
     }
   ];
+  function handleChange(e) {
+    console.log(e.target);
+  }
   out = construct(options);
   // console.log(out);
   return (
@@ -183,6 +188,11 @@ export default function App() {
           </ul>
         </div>
       </nav>
+      <select class="form-control" onChange={handleChange}>
+        {ls.map((item, index) => {
+          return <option value={index}>{item}</option>;
+        })}
+      </select>
     </div>
   );
 }
