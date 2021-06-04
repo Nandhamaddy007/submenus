@@ -36,3 +36,13 @@
 .left-caret:after {
   border-right: 10px solid #ffaf46;
 }
+select {
+  height: 3rem;
+  width: 20rem;
+  margin-left: 5rem;
+  margin-top: 5rem;
+  border-radius: 4px;
+}
+option {
+  border: 1px solid #4c3c1b;
+}

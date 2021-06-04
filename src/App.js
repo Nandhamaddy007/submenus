@@ -3,6 +3,7 @@ import $ from 'jquery';
 import './styles.css';
 let ls = [];
 let out = [];
+let ids = [];
 
 export default function App() {
   useEffect(() => {
@@ -32,33 +33,34 @@ export default function App() {
       });
     });
   });
-  let rend = option => {
-    console.log(option);
+  let rend = (option, index) => {
+    console.log(index);
+    ids.push(index);
     if (option.option && option.option != '') {
       //console.log(option.option);
+
       return (
-        <li>
+        <li id={index}>
           <a className="trigger right-caret">{option.select}</a>
-          {construct(option.option)}
+          {construct(option.option, index)}
         </li>
       );
     } else {
       // console.log(option);
       return (
-        <li>
+        <li id={index}>
           <a>{option.select}</a>
         </li>
       );
     }
   };
-  let construct = options => {
+  let construct = (options, ind) => {
     let data = [];
-    for (let option of options) {
-      // console.log(option);
+    for (let [index, option] of options.entries()) {
       ls.push(option.select);
-      data.push(rend(option));
+      data.push(rend(option, ind != undefined ? ind + '.' + index : index));
     }
-    console.log(ls);
+    //console.log(ls);
     if (options.option && options.option != '') {
       return <ul>{data}</ul>;
     } else {
@@ -71,7 +73,7 @@ export default function App() {
       select: 'Option1',
       option: [
         {
-          select: 'Level2',
+          select: 'Level1',
           option: ''
         }
       ]
@@ -80,7 +82,7 @@ export default function App() {
       select: 'Option2',
       option: [
         {
-          select: 'level2',
+          select: 'level1.1',
           option: [
             {
               select: 'level2.1',
@@ -102,10 +104,14 @@ export default function App() {
           ]
         },
         {
-          select: 'level3',
+          select: 'level1.2',
           option: [
             {
-              select: 'level3.1',
+              select: 'level2.3.1',
+              option: ''
+            },
+            {
+              select: 'level2.3.2',
               option: ''
             }
           ]
@@ -113,86 +119,117 @@ export default function App() {
       ]
     }
   ];
-  function handleChange(e) {
-    console.log(e.target);
-  }
   out = construct(options);
   // console.log(out);
+  function handleClick(e) {
+    document.getElementById('');
+  }
   return (
     <div>
       <nav class="navbar navbar-inverse">
         <div class="container-fluid">
           <div class="navbar-header">
             <a class="navbar-brand" href="#">
-              Submenus
+              N level DropDown
             </a>
+            <button
+              type="button"
+              class="navbar-toggle collapsed"
+              data-toggle="collapse"
+              data-target="#dropdown"
+              aria-expanded="false"
+            >
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar" />
+              <span class="icon-bar" />
+              <span class="icon-bar" />
+            </button>
           </div>
-          <ul class="nav navbar-nav">
-            <li className="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                Dynamic Dropdown
-                <span class="caret" />
-              </a>
-              {out}
-            </li>
-            <li class="dropdown">
-              <a href="#" class=" dropdown-toggle" data-toggle="dropdown">
-                Static Dropdown
-                <span class="caret" />
-              </a>
-              <ul class="dropdown-menu">
-                <li>
-                  <a class="trigger right-caret">Level 1</a>
-                  <ul class="dropdown-menu sub-menu">
-                    <li>
-                      <a href="#">Level 2</a>
-                    </li>
-                    <li>
-                      <a class="trigger right-caret">Level 2</a>
-                      <ul class="dropdown-menu sub-menu">
-                        <li>
-                          <a href="#">Level 3</a>
-                        </li>
-                        <li>
-                          <a href="#">Level 3</a>
-                        </li>
-                        <li>
-                          <a class="trigger right-caret">Level 3</a>
-                          <ul class="dropdown-menu sub-menu">
-                            <li>
-                              <a href="#">Level 4</a>
-                            </li>
-                            <li>
-                              <a href="#">Level 4</a>
-                            </li>
-                            <li>
-                              <a href="#">Level 4</a>
-                            </li>
-                          </ul>
-                        </li>
-                      </ul>
-                    </li>
-                    <li>
-                      <a href="#">Level 2</a>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <a href="#">Level 1</a>
-                </li>
-                <li>
-                  <a href="#">Level 1</a>
-                </li>
-              </ul>
-            </li>
-          </ul>
+          <div className="collapse navbar-collapse" id="dropdown">
+            <ul class="nav navbar-nav">
+              <li className="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  Dynamic Dropdown
+                  <span class="caret" />
+                </a>
+                {out}
+              </li>
+              <li class="dropdown">
+                <a href="#" class=" dropdown-toggle" data-toggle="dropdown">
+                  Static Dropdown
+                  <span class="caret" />
+                </a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a class="trigger right-caret">Level 1</a>
+                    <ul class="dropdown-menu sub-menu">
+                      <li>
+                        <a href="#">Level 2</a>
+                      </li>
+                      <li>
+                        <a class="trigger right-caret">Level 2</a>
+                        <ul class="dropdown-menu sub-menu">
+                          <li>
+                            <a href="#">Level 3</a>
+                          </li>
+                          <li>
+                            <a href="#">Level 3</a>
+                          </li>
+                          <li>
+                            <a class="trigger right-caret">Level 3</a>
+                            <ul class="dropdown-menu sub-menu">
+                              <li>
+                                <a href="#">Level 4</a>
+                              </li>
+                              <li>
+                                <a href="#">Level 4</a>
+                              </li>
+                              <li>
+                                <a href="#">Level 4</a>
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </li>
+                      <li>
+                        <a href="#">Level 2</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <a href="#">Level 1</a>
+                  </li>
+                  <li>
+                    <a href="#">Level 1</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
         </div>
       </nav>
-      <select class="form-control" onChange={handleChange}>
+      <select id="option">
         {ls.map((item, index) => {
-          return <option value={index}>{item}</option>;
+          return <option value={ids[index]}>{item}</option>;
         })}
       </select>
+      <input
+        type="text"
+        style={{
+          width: '20rem',
+          height: '3rem',
+          marginLeft: '5rem',
+          marginTop: '1rem'
+        }}
+        className="form-control"
+      />
+      <button
+        className="btn btn-primary"
+        style={{ marginLeft: '19rem', marginTop: '1rem' }}
+        click={handleClick}
+      >
+        Add+
+      </button>
     </div>
   );
 }
