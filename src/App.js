@@ -69,57 +69,78 @@ export default function App() {
   };
 
   let options = [
-    {
-      select: 'Option1',
-      option: [
-        {
-          select: 'Level1',
-          option: ''
-        }
-      ]
-    },
-    {
-      select: 'Option2',
-      option: [
-        {
-          select: 'level1.1',
-          option: [
-            {
-              select: 'level2.1',
-              option: ''
-            },
-            {
-              select: 'level2.2',
-              option: [
-                {
-                  select: 'level2.2.1',
-                  option: ''
-                },
-                {
-                  select: 'level2.2.2',
-                  option: ''
-                }
-              ]
-            }
-          ]
-        },
-        {
-          select: 'level1.2',
-          option: [
-            {
-              select: 'level2.3.1',
-              option: ''
-            },
-            {
-              select: 'level2.3.2',
-              option: ''
-            }
-          ]
-        }
-      ]
-    }
+    [
+      {
+        select: 'Option1',
+        option: [
+          {
+            select: 'Level1',
+            option: ''
+          }
+        ]
+      },
+      {
+        select: 'Option2',
+        option: [
+          {
+            select: 'level1.1',
+            option: [
+              {
+                select: 'level2.1',
+                option: ''
+              },
+              {
+                select: 'level2.2',
+                option: [
+                  {
+                    select: 'level2.2.1',
+                    option: ''
+                  },
+                  {
+                    select: 'level2.2.2',
+                    option: ''
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            select: 'level1.2',
+            option: [
+              {
+                select: 'level2.3.1',
+                option: ''
+              },
+              {
+                select: 'level2.3.2',
+                option: ''
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    [
+      {
+        select: 'Option3',
+        option: [
+          {
+            select: 'level3.1',
+            option: ''
+          },
+          {
+            select: 'level3.2',
+            option: ''
+          }
+        ]
+      }
+    ]
   ];
-  out = construct(options);
+  for (let opt in options) {
+    console.log(options[opt]);
+    out[opt] = construct(options[opt]);
+  }
+
   // console.log(out);
   function handleClick(e) {
     document.getElementById('');
@@ -147,13 +168,18 @@ export default function App() {
           </div>
           <div className="collapse navbar-collapse" id="dropdown">
             <ul class="nav navbar-nav">
-              <li className="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  Dynamic Dropdown
-                  <span class="caret" />
-                </a>
-                {out}
-              </li>
+              {out.map((item, index) => {
+                return (
+                  <li className="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                      Dynamic Dropdown{index}
+                      <span class="caret" />
+                    </a>
+                    {item}
+                  </li>
+                );
+              })}
+
               <li class="dropdown">
                 <a href="#" class=" dropdown-toggle" data-toggle="dropdown">
                   Static Dropdown
