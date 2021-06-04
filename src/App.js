@@ -133,6 +133,28 @@ export default function App() {
             option: ''
           }
         ]
+      },
+      {
+        select: 'Option4',
+        option: [
+          {
+            select: 'level4.1',
+            option: ''
+          },
+          {
+            select: 'level4.2',
+            option: [
+              {
+                select: 'Level4.2.1',
+                option: ''
+              },
+              {
+                select: 'Level4.2.2',
+                option: ''
+              }
+            ]
+          }
+        ]
       }
     ]
   ];
@@ -172,7 +194,7 @@ export default function App() {
                 return (
                   <li className="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                      Dynamic Dropdown{index}
+                      Dynamic Dropdown{index + 1}
                       <span class="caret" />
                     </a>
                     {item}
@@ -254,7 +276,7 @@ export default function App() {
         style={{ marginLeft: '19rem', marginTop: '1rem' }}
         click={handleClick}
       >
-        Add+
+        Add <b>+</b>
       </button>
     </div>
   );
